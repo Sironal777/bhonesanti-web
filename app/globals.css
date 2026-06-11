@@ -1,0 +1,92 @@
+/* bhonesanti-web/app/globals.css */
+@import "tailwindcss";
+
+:root {
+  --bg-liquid-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  --glass-bg: rgba(255, 255, 255, 0.35);
+  --glass-border: rgba(255, 255, 255, 0.7);
+
+  --text-title-sub: #0f766e;
+  --text-long-read: #1e293b;
+  --text-note: #6d28d9;
+}
+
+[data-theme="dark"] {
+  /* အပြာရောင်နည်းနည်းရောသည့် အနက်ရောင်နောက်ခံ */
+  --bg-liquid-gradient: linear-gradient(135deg, #030712 0%, #0f172a 100%);
+  --glass-bg: rgba(15, 23, 42, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.15);
+
+  --text-title-sub: #2dd4bf;
+  --text-long-read: #f8fafc;
+  --text-note: #c084fc;
+}
+
+body {
+  background: var(--bg-liquid-gradient);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  transition: background 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 🔥 ဒစ်ဂျစ်တယ်လှိုင်းများ ဖြည်းဖြည်းချင်း ရွေ့လျားစီးဆင်းမည့်စနစ် */
+.digital-wave-bg {
+  position: fixed; /* နေရာသေထားရန် */
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background-image: radial-gradient(rgba(99, 102, 241, 0.15) 2px, transparent 0);
+  background-size: 40px 40px;
+  animation: moveWaves 15s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes moveWaves {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+/* iOS Glassmorphism စတိုင်စစ်စစ် */
+.ios-glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(40px) saturate(220%);
+  -webkit-backdrop-filter: blur(40px) saturate(220%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.ios-glass-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 50px -15px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.45);
+}
+
+[data-theme="dark"] .ios-glass-card:hover {
+  background: rgba(30, 41, 59, 0.55);
+}
+
+/* ရွှေရောင်အရောင်ပြောင်းစနစ် */
+@keyframes goldMovement {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🔥 ခေါင်းစဉ်စာလုံး အပေါ်ပိုင်းမပြတ်အောင် နေရာချဲ့ထားခြင်း (Fixed Clipping) */
+.font-main-title {
+  font-family: var(--font-title-main), sans-serif;
+  font-weight: 400;
+  line-height: 1.6; /* အသတ်များ၊ လုံးကြီးတင်များ မပြတ်စေရန် */
+  padding: 0.2em 0; /* အပေါ်နှင့် အောက် နေရာအလွတ်ပေးထားခြင်း */
+  background: linear-gradient(90deg, #ffe066, #f59e0b, #d97706, #fcd34d, #ffe066);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldMovement 5s linear infinite;
+  display: inline-block; /* Layout သေချာစေရန် */
+}
+
+.font-sub-title { font-family: var(--font-title-sub), sans-serif; color: var(--text-title-sub); font-weight: 700; }
+.font-long-read { font-family: var(--font-reading), sans-serif; color: var(--text-long-read); line-height: 1.8; }
+.font-note-text { font-family: var(--font-note), sans-serif; color: var(--text-note); }

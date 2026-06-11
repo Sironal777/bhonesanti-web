@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-liquid-gradient: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --text-title-main: #4f46e5;
+  --text-title-sub: #059669;
+  --text-long-read: #1f2937;
+  --text-note: #7c3aed;
+  --text-warning: #dc2626;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-liquid-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    --glass-bg: rgba(15, 23, 42, 0.55);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --text-title-main: #818cf8;
+    --text-title-sub: #34d399;
+    --text-long-read: #f3f4f6;
+    --text-note: #a78bfa;
+    --text-warning: #f87171;
+  }
+}
+
+body {
+  background: var(--bg-liquid-gradient);
+  min-height: 100vh;
+  transition: all 0.5s ease;
+}
+
+.ios-glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
+}
+
+.font-main-title { font-family: var(--font-title-main), sans-serif; color: var(--text-title-main); }
+.font-sub-title { font-family: var(--font-title-sub), sans-serif; color: var(--text-title-sub); }
+.font-long-read { font-family: var(--font-reading), sans-serif; color: var(--text-long-read); line-height: 1.8; }
+.font-note-text { font-family: var(--font-note), sans-serif; color: var(--text-note); }
+.font-alert-warn { font-family: var(--font-warning), sans-serif; color: var(--text-warning); }
