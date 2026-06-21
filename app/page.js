@@ -4,7 +4,7 @@
 import { useState, useEffect } from 'react';
 
 export default function Home() {
-  const [theme, setTheme] = useState('dark'); // Ticket စတိုင်သည် Dark တွင် ပိုမိုက်သဖြင့် Dark ကို default ထားသည်
+  const [theme, setTheme] = useState('dark');
   const [lang, setLang] = useState('MM');
   const [activeSection, setActiveSection] = useState(null);
 
@@ -22,48 +22,49 @@ export default function Home() {
 
   return (
     <div className="relative h-screen w-full flex items-center justify-center">
-      {/* ရှင်းလင်းပြတ်သားသော Aurora Glow */}
+      {/* Aurora Glow */}
       <div className="premium-aurora-bg"></div>
 
       {/* Control Panel */}
-      <div className="absolute top-6 right-6 md:right-12 z-50 flex items-center space-x-4 bg-[var(--glass-bg)] backdrop-blur-md border border-[var(--glass-border)] p-2 rounded-full shadow-sm">
+      <div className="absolute top-6 right-6 md:right-12 z-50 flex items-center space-x-4 bg-[var(--glass-bg)] backdrop-blur-md border border-[var(--glass-border)] p-2 rounded-full shadow-sm font-note-text">
         <div className="flex gap-2 text-sm">
-          <button onClick={() => setLang('MM')} className={`px-4 py-1.5 rounded-full font-bold transition-all ${lang === 'MM' ? 'bg-blue-600 text-white' : 'hover:bg-gray-500/20'}`}>MM</button>
-          <button onClick={() => setLang('EN')} className={`px-4 py-1.5 rounded-full font-bold transition-all ${lang === 'EN' ? 'bg-blue-600 text-white' : 'hover:bg-gray-500/20'}`}>EN</button>
+          <button onClick={() => setLang('MM')} className={`px-4 py-1.5 rounded-full transition-all ${lang === 'MM' ? 'bg-blue-600 text-white' : 'hover:bg-gray-500/20 text-[var(--text-main)]'}`}>MM</button>
+          <button onClick={() => setLang('EN')} className={`px-4 py-1.5 rounded-full transition-all ${lang === 'EN' ? 'bg-blue-600 text-white' : 'hover:bg-gray-500/20 text-[var(--text-main)]'}`}>EN</button>
         </div>
         <div className="w-px h-5 bg-[var(--glass-border)]"></div>
-        <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} className="px-4 py-1.5 rounded-full text-sm font-bold transition-all hover:bg-gray-500/20">
+        <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} className="px-4 py-1.5 rounded-full text-sm transition-all hover:bg-gray-500/20 text-[var(--text-main)]">
           {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
         </button>
       </div>
 
       <main className="relative z-10 w-full max-w-6xl h-[85vh] flex flex-col md:flex-row gap-10 p-6 md:p-10">
         
-        {/* Left Side: Sleek Menu */}
+        {/* Left Side: 3D Hover Menu */}
         <div className="w-full md:w-[35%] h-full flex flex-col justify-center space-y-8">
           <div className="text-left mb-4">
-            <h1 className="text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent pb-2">
+            <h1 className="font-main-title gold-text-anim text-5xl lg:text-6xl tracking-tight pb-2">
               Bhone Santi
             </h1>
-            <p className="text-lg mt-2 opacity-70">
+            <p className="font-note-text text-lg mt-2 opacity-70">
               {lang === 'MM' ? 'သာသနာဆိုင်ရာနှင့် နည်းပညာ သုတေသန ဗဟိုဌာန' : 'Religious & Technological Research Hub'}
             </p>
           </div>
 
-          <div className="flex flex-col space-y-2">
+          <div className="flex flex-col space-y-3">
             {sections.map((sec) => (
-              <button 
-                key={sec.id}
-                onClick={() => setActiveSection(sec)}
-                className={`sleek-menu-btn ${activeSection?.id === sec.id ? 'active-btn' : ''}`}
-              >
-                {sec.title}
-              </button>
+              <div key={sec.id} className="menu-wrapper">
+                <button 
+                  onClick={() => setActiveSection(sec)}
+                  className={`sleek-menu-btn font-sub-title text-xl ${activeSection?.id === sec.id ? 'active-btn' : ''}`}
+                >
+                  {sec.title}
+                </button>
+              </div>
             ))}
           </div>
         </div>
 
-        {/* Right Side: Uiverse 3D Ticket */}
+        {/* Right Side: Uiverse 3D Ticket without Barcode */}
         <div className="w-full md:w-[65%] h-full flex items-center justify-center relative">
           {activeSection ? (
             <div className="ticket-wrapper">
@@ -73,15 +74,16 @@ export default function Home() {
                 <div className="t-main">
                   <div className="t-content">
                     <div className="t-header">
-                      <div className="t-logo">
+                      <div className="t-logo font-sub-title">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2zm0 4.5l7.5 13.5h-15L12 6.5z"/></svg>
                         B.SANTI
                       </div>
-                      <div className="t-type">{activeSection.type}</div>
+                      <div className="t-type font-note-text font-bold text-xs">{activeSection.type}</div>
                     </div>
                     
-                    <h2 className="t-title">{activeSection.title}</h2>
-                    <p className="t-subtitle">{activeSection.content}</p>
+                    {/* ဖောင့်အလှများ ပြန်သုံးထားသည် */}
+                    <h2 className="t-title font-sub-title text-3xl">{activeSection.title}</h2>
+                    <p className="t-subtitle font-long-read text-lg">{activeSection.content}</p>
                   </div>
                 </div>
 
@@ -90,22 +92,24 @@ export default function Home() {
                   <div className="t-perf-line"></div>
                 </div>
 
-                {/* Ticket Stub (Bottom Part) */}
+                {/* Ticket Stub (Barcode Removed) */}
                 <div className="t-stub">
-                  <div className="t-barcode-container">
-                    <div className="t-barcode"></div>
-                    <div className="t-barcode-id">UID-BS-{activeSection.id}-2026</div>
+                  <div className="flex flex-col gap-1">
+                    <div className="font-note-text text-xs tracking-[0.2em] opacity-60 text-[var(--t-text-muted)]">ISSUED</div>
+                    <div className="font-sub-title text-xl">2026</div>
                   </div>
-                  <div className="t-admit">
-                    <div className="t-admit-text">ACCESS CODE</div>
-                    <div className="t-admit-num">{activeSection.id}</div>
+                  <div className="text-right">
+                    <div className="font-note-text text-xs tracking-[0.1em] opacity-60 text-[var(--t-text-muted)]">ACCESS CODE</div>
+                    <div className="font-sub-title text-5xl font-bold leading-none text-[var(--t-accent)] drop-shadow-[0_0_15px_var(--t-accent-glow)]">
+                      {activeSection.id}
+                    </div>
                   </div>
                 </div>
 
               </div>
             </div>
           ) : (
-            <div className="text-center opacity-40 p-10">
+            <div className="text-center opacity-40 p-10 font-note-text">
               <p className="text-xl">
                 အကြောင်းအရာများကို ဖတ်ရှုရန် ဘယ်ဘက်မှ ခေါင်းစဉ်များကို နှိပ်ပါ။
               </p>
