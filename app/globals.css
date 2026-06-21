@@ -3,36 +3,46 @@
 
 :root {
   /* Premium Light Theme */
-  --bg-liquid-gradient: #f8fafc;
-  --glass-bg: rgba(255, 255, 255, 0.5);
+  --bg-liquid-gradient: #f1f5f9;
+  --glass-bg: rgba(255, 255, 255, 0.6);
   --glass-border: rgba(255, 255, 255, 0.8);
+  --text-main: #0f172a;
   
-  --text-title-sub: #0f766e;        /* ရေမှော်စိမ်းရင့် */
-  --text-long-read: #0f172a;        /* အနက်ရောင်/ခဲရင့် (ဖတ်ရလွယ်စေရန်) */
-  --text-note: #6d28d9;
+  /* Ticket Variables (Light Mode) */
+  --t-bg: #ffffff;
+  --t-bg-light: #f8fafc;
+  --t-accent: #4f46e5;
+  --t-accent-glow: rgba(79, 70, 229, 0.4);
+  --t-text-main: #1e293b;
+  --t-text-muted: #64748b;
 }
 
 [data-theme="dark"] {
-  /* Premium Midnight Dark Theme */
+  /* Premium Dark Theme */
   --bg-liquid-gradient: #050b14;
   --glass-bg: rgba(15, 23, 42, 0.4);
   --glass-border: rgba(255, 255, 255, 0.1);
-  
-  --text-title-sub: #2dd4bf;        /* ရေမှော်စိမ်းလင်း */
-  --text-long-read: #f8fafc;        /* အဖြူရောင် (စာပျောက်ခြင်းကို ကာကွယ်ရန်) */
-  --text-note: #a78bfa;
+  --text-main: #f8fafc;
+
+  /* Ticket Variables (Dark Mode) */
+  --t-bg: #1e1e24;
+  --t-bg-light: #2b2b36;
+  --t-accent: #7c3aed;
+  --t-accent-glow: rgba(124, 58, 237, 0.5);
+  --t-text-main: #f8fafc;
+  --t-text-muted: #94a3b8;
 }
 
 body {
   background-color: var(--bg-liquid-gradient);
-  color: var(--text-long-read);
+  color: var(--text-main);
   min-height: 100vh;
   overflow: hidden;
   position: relative;
   transition: background-color 0.8s ease, color 0.8s ease;
 }
 
-/* 🔥 Premium Aurora Glow Background Animation */
+/* 🔥 ထင်ရှားသော Premium Aurora Glow (အလင်းတန်း မျောလွင့်ခြင်း) */
 .premium-aurora-bg {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
@@ -40,110 +50,117 @@ body {
   overflow: hidden;
   pointer-events: none;
 }
-
-.premium-aurora-bg::before,
-.premium-aurora-bg::after {
+.premium-aurora-bg::before, .premium-aurora-bg::after {
   content: '';
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.6;
-  animation: floatOrb 20s ease-in-out infinite alternate;
+  filter: blur(100px);
+  opacity: 0.8; /* အလင်းအား ပိုတင်ထားသည် */
+  animation: floatOrb 15s ease-in-out infinite alternate;
 }
-
 .premium-aurora-bg::before {
   width: 50vw; height: 50vh;
-  background: rgba(56, 189, 248, 0.2); /* Sky Blue Soft Glow */
+  background: rgba(56, 189, 248, 0.3);
   top: -10%; left: -10%;
 }
-
 .premium-aurora-bg::after {
   width: 60vw; height: 60vh;
-  background: rgba(139, 92, 246, 0.15); /* Purple Soft Glow */
+  background: rgba(139, 92, 246, 0.25);
   bottom: -20%; right: -10%;
-  animation-delay: -10s;
+  animation-delay: -7s;
 }
-
-[data-theme="dark"] .premium-aurora-bg::before { background: rgba(56, 189, 248, 0.15); }
-[data-theme="dark"] .premium-aurora-bg::after { background: rgba(250, 204, 21, 0.1); /* Gold Soft Glow in Dark Mode */ }
+[data-theme="dark"] .premium-aurora-bg::before { background: rgba(56, 189, 248, 0.2); }
+[data-theme="dark"] .premium-aurora-bg::after { background: rgba(250, 204, 21, 0.15); }
 
 @keyframes floatOrb {
   0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(15vw, 15vh) scale(1.3); }
+  100% { transform: translate(10vw, 15vh) scale(1.2); }
 }
 
-/* Card Content Reveal Animation */
-.content-reveal {
-  animation: smoothReveal 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-@keyframes smoothReveal {
-  0% { opacity: 0; transform: scale(0.95) translateY(20px); filter: blur(8px); }
-  100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
-}
-
-/* Shimmering Gold Title */
-@keyframes goldMovement {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-.font-main-title {
-  font-family: var(--font-title-main), sans-serif;
-  line-height: 1.6;
-  padding: 0.2em 0;
-  background: linear-gradient(90deg, #d97706, #f59e0b, #fbbf24, #f59e0b, #d97706);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: goldMovement 6s linear infinite;
-  display: inline-block;
-}
-
-/* Uiverse Magic Button - Colors Fixed */
-.magic-btn {
-  position: relative;
-  padding: 16px 30px;
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--glass-border);
-  border-radius: 14px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
+/* 🔥 သန့်ရှင်းပြတ်သားသော ဘယ်ဘက် Menu (Sleek Button) */
+.sleek-menu-btn {
+  width: 100%;
   text-align: left;
-  overflow: visible;
-  z-index: 10;
-  color: var(--text-long-read); /* စာသားမပျောက်စေရန် */
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+  opacity: 0.7;
+}
+.sleek-menu-btn:hover {
+  background: var(--glass-bg);
+  opacity: 1;
+  transform: translateX(5px);
+}
+.sleek-menu-btn.active-btn {
+  background: var(--glass-bg);
+  border-left: 4px solid var(--t-accent);
+  opacity: 1;
+  transform: translateX(10px);
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
 }
 
-.magic-btn:hover, .magic-btn.active-btn {
-  padding: 16px 20px 16px 40px;
-  border-radius: 14px 14px 28px 28px;
-  background: #f5ddb7 !important; /* Premium Gold */
-  color: #181818 !important; /* အဝါနောက်ခံပေါ်တွင် စာသားကို အနက်ရောင်သက်သက်ထားပါမည် */
-  border-color: transparent;
-  box-shadow: 0 10px 30px -10px rgba(245, 221, 183, 0.5);
+/* 🔥 Uiverse Ticket CSS (ကိုလူးရွေးချယ်ထားသော 3D စတိုင်) */
+.ticket-wrapper {
+  perspective: 1000px;
+  display: inline-block;
+  width: 100%;
+  max-width: 500px;
 }
-
-.magic-icon {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 0px; height: auto;
-  transition: all 0.5s ease;
-  z-index: -1;
-  opacity: 0;
+.ticket {
+  position: relative;
+  width: 100%;
+  color: var(--t-text-main);
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s ease;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  background: transparent;
+  filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.2));
 }
-
-.magic-btn:hover .icon-1, .magic-btn.active-btn .icon-1 { top: -140%; left: 20%; width: 45px; opacity: 1; animation: inIcon1 1s ease 0.1s forwards; }
-.magic-btn:hover .icon-2, .magic-btn.active-btn .icon-2 { top: -90%; left: 80%; width: 55px; opacity: 1; animation: inIcon2 1s ease 0.2s forwards; }
-.magic-btn:hover .icon-3, .magic-btn.active-btn .icon-3 { top: -70%; left: 10%; width: 35px; opacity: 1; animation: inIcon3 1s ease 0.15s forwards; }
-
-@keyframes inIcon1 { 0% { transform: translate(-50%, 0) rotate(0deg) scale(0.5); } 50% { transform: translate(-50%, -20px) rotate(15deg) scale(1.2); } 100% { transform: translate(-50%, 0) rotate(5deg) scale(1); } }
-@keyframes inIcon2 { 0% { transform: translate(-50%, 0) rotate(0deg) scale(0.5); } 50% { transform: translate(-50%, -15px) rotate(-10deg) scale(1.1); } 100% { transform: translate(-50%, 0) rotate(-5deg) scale(1); } }
-@keyframes inIcon3 { 0% { transform: translate(-50%, 0) rotate(0deg) scale(0.5); } 50% { transform: translate(-50%, -25px) rotate(20deg) scale(1.3); } 100% { transform: translate(-50%, 0) rotate(10deg) scale(1); } }
-
-.fil-leaf { fill: #d97706; } /* အရွက်လေးများ ပိုမိုတောက်ပစေရန် */
-
-.font-sub-title { font-family: var(--font-title-sub), sans-serif; font-weight: 700; }
-.font-long-read { font-family: var(--font-reading), sans-serif; line-height: 1.8; }
-.font-note-text { font-family: var(--font-note), sans-serif; }
+.ticket-wrapper:hover .ticket {
+  transform: rotateX(5deg) rotateY(-10deg) scale(1.02);
+  box-shadow: 20px 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1), -5px -5px 20px var(--t-accent-glow);
+}
+.ticket::after {
+  content: ""; position: absolute; inset: 0; border-radius: 1em; pointer-events: none;
+  background: linear-gradient(115deg, transparent 0%, transparent 40%, rgba(255, 255, 255, 0.1) 45%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.1) 55%, transparent 60%, transparent 100%);
+  z-index: 10; background-size: 250% 250%; background-position: 100% 100%; transition: background-position 0.6s cubic-bezier(0.23, 1, 0.32, 1); mix-blend-mode: overlay;
+}
+.ticket-wrapper:hover .ticket::after { background-position: 0% 0%; }
+.t-main {
+  padding: 2.5em; position: relative; overflow: hidden;
+  background: radial-gradient(circle at bottom left, transparent 1.5em, var(--t-bg) 1.55em), radial-gradient(circle at bottom right, transparent 1.5em, var(--t-bg) 1.55em);
+  background-size: 51% 100%; background-position: bottom left, bottom right; background-repeat: no-repeat;
+  border-top-left-radius: 1.5em; border-top-right-radius: 1.5em;
+}
+.t-main::after {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background-image: linear-gradient(var(--t-accent-glow) 1px, transparent 1px), linear-gradient(90deg, var(--t-accent-glow) 1px, transparent 1px);
+  background-size: 2em 2em; opacity: 0.3; z-index: 0; pointer-events: none;
+  transform: perspective(500px) rotateX(20deg) scale(1.5); animation: grid-scroll 20s linear infinite;
+}
+@keyframes grid-scroll { 0% { background-position: 0 0; } 100% { background-position: 0 4em; } }
+.t-content { position: relative; z-index: 1; }
+.t-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2em; }
+.t-logo { display: flex; align-items: center; gap: 0.5em; font-weight: 900; font-size: 1.2em; color: var(--t-text-main); }
+.t-logo svg { width: 1.5em; height: 1.5em; fill: var(--t-accent); filter: drop-shadow(0 0 5px var(--t-accent)); animation: logo-pulse 3s ease-in-out infinite alternate; }
+@keyframes logo-pulse { 0% { filter: drop-shadow(0 0 2px var(--t-accent)); } 100% { filter: drop-shadow(0 0 10px var(--t-accent)) brightness(1.2); } }
+.t-type { font-size: 0.7em; text-transform: uppercase; letter-spacing: 0.2em; color: var(--t-accent); border: 1px solid var(--t-accent); padding: 0.4em 0.8em; border-radius: 99em; font-weight: 700; }
+.t-title { font-size: 2.2em; font-weight: 900; line-height: 1.3; margin-bottom: 0.5em; color: var(--t-text-main); }
+.t-subtitle { color: var(--t-text-muted); font-size: 1.1em; line-height: 1.8; margin-bottom: 2em; }
+.t-perforation { display: flex; justify-content: space-between; height: 1em; align-items: center; position: relative; z-index: 2; }
+.t-perf-line { flex-grow: 1; height: 0; border-top: 2px dashed rgba(128, 128, 128, 0.4); margin: 0 1.5em; }
+.t-stub {
+  padding: 2em 2.5em; display: flex; justify-content: space-between; align-items: center; position: relative;
+  background: radial-gradient(circle at top left, transparent 1.5em, var(--t-bg-light) 1.55em), radial-gradient(circle at top right, transparent 1.5em, var(--t-bg-light) 1.55em);
+  background-size: 51% 100%; background-position: top left, top right; background-repeat: no-repeat;
+  border-bottom-left-radius: 1.5em; border-bottom-right-radius: 1.5em;
+}
+.t-barcode { width: 8em; height: 2.5em; background: repeating-linear-gradient(90deg, var(--t-text-main) 0, var(--t-text-main) 2px, transparent 2px, transparent 4px, var(--t-text-main) 4px, var(--t-text-main) 5px, transparent 5px, transparent 8px, var(--t-text-main) 8px, var(--t-text-main) 12px, transparent 12px, transparent 15px, var(--t-text-main) 15px, var(--t-text-main) 16px, transparent 16px, transparent 18px); opacity: 0.5; }
+.t-barcode-id { font-family: monospace; font-size: 0.7em; color: var(--t-text-muted); letter-spacing: 0.2em; margin-top: 0.5em; }
+.t-admit-text { font-size: 0.7em; text-transform: uppercase; letter-spacing: 0.1em; color: var(--t-text-muted); text-align: right; }
+.t-admit-num { font-size: 3em; font-weight: 900; line-height: 1; color: var(--t-accent); text-shadow: 0 0 15px var(--t-accent-glow); }
+.ticket-wrapper:active .ticket { transform: rotateX(15deg) rotateY(-5deg) scale(0.98); }
+.ticket-wrapper:active .t-stub { transform: translateY(5px) rotateZ(2deg); opacity: 0.8; }
